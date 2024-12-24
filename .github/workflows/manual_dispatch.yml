@@ -1,0 +1,22 @@
+name: Manual Dispatch Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (e.g., dev, staging, prod)'
+        required: true
+        default: 'dev'
+      deploy_version:
+        description: 'Deployment version (e.g., v1.0.0)'
+        required: false
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Deploy Version: ${{ github.event.inputs.deploy_version }}"
