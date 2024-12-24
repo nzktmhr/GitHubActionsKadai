@@ -1,0 +1,51 @@
+name: Advanced Manual Dispatch Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (dev, staging, prod)'
+        required: true
+        default: 'dev'
+      deploy_version:
+        description: 'Deployment version (e.g., v1.0.0)'
+        required: true
+      feature_toggle:
+        description: 'Enable new feature? (yes/no)'
+        required: false
+        default: 'no'
+
+jobs:
+  process-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Display inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Deploy Version: ${{ github.event.inputs.deploy_version }}"
+          echo "Feature Toggle: ${{ github.event.inputs.feature_toggle }}"
+
+      - name: Run for Development Environment
+        if: ${{ github.event.inputs.environment == 'dev' }}
+        run: |
+          echo "Deploying to Development Environment"
+          echo "Version: ${{ github.event.inputs.deploy_version }}"
+          echo "Feature Toggle: ${{ github.event.inputs.feature_toggle }}"
+
+      - name: Run for Staging Environment
+        if: ${{ github.event.inputs.environment == 'staging' }}
+        run: |
+          echo "Deploying to Staging Environment"
+          echo "Version: ${{ github.event.inputs.deploy_version }}"
+          echo "Feature Toggle: ${{ github.event.input.feature_toggle }}"
+
+      - name: Run for Production Environment
+        if: ${{ github.event.inputs.environment == 'prod' }}
+        run: |
+          echo "Deploying to Production Environment"
+          echo "Version: ${{ github.event.inputs.deploy_version }}"
+          echo "Feature Toggle: ${{ github.event.inputs.feature_toggle }}"
