@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "Deploying to Staging Environment"
           echo "Version: ${{ github.event.inputs.deploy_version }}"
-          echo "Feature Toggle: ${{ github.event.input.feature_toggle }}"
+          echo "Feature Toggle: '${{ github.event.input.feature_toggle }}'"
 
       - name: Run for Production Environment
         if: ${{ github.event.inputs.environment == 'prod' }}
