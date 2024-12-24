@@ -1,4 +1,4 @@
-name: Job-to-Job Communication(push test)
+name: Job-to-Job Communication
 
 on:
   push:
