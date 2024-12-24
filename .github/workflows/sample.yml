@@ -8,8 +8,15 @@ jobs:
   run-bash-script:
     runs-on: ubuntu-latest
     steps:
+      # リポジトリをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      # ファイルとその権限を確認
+      - name: List files with permissions
+        run: ls -l
+
+      # カスタムアクションを実行
       - name: Run custom action
         uses: ./
         with:
