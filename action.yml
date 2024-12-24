@@ -16,3 +16,4 @@ runs:
 
     - name: Run bash script
       run: ./main.sh "${{ inputs.name }}" "${{ inputs.greeting }}"
+      shell: bash
