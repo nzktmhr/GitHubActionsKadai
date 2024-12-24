@@ -29,12 +29,22 @@ jobs:
           echo "Deploy Version: ${{ github.event.inputs.deploy_version }}"
           echo "Feature Toggle: ${{ github.event.inputs.feature_toggle }}"
 
+      - name: Debugging Feature Toggle
+        run: |
+          echo "Raw input value: ${{ toJson(github.event.inputs) }}"
+          echo "Feature Toggle: '${{ github.event.inputs.feature_toggle }}'"
+
       - name: Run for Development Environment
         if: ${{ github.event.inputs.environment == 'dev' }}
         run: |
           echo "Deploying to Development Environment"
           echo "Version: ${{ github.event.inputs.deploy_version }}"
           echo "Feature Toggle: ${{ github.event.inputs.feature_toggle }}"
+          
+      - name: Debugging Feature Toggle
+        run: |
+          echo "Raw input value: ${{ toJson(github.event.inputs) }}"
+          echo "Feature Toggle: '${{ github.event.inputs.feature_toggle }}'"
 
       - name: Run for Staging Environment
         if: ${{ github.event.inputs.environment == 'staging' }}
