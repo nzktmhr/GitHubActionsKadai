@@ -1,0 +1,34 @@
+name: Artifacts Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create a file to upload
+        run: echo "Hello, this is a test file!" > test-file.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: test-file.txt
+
+  download:
+    runs-on: ubuntu-latest
+    needs: upload
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my-artifact
+
+      - name: Display downloaded file
+        run: cat test-file.txt
