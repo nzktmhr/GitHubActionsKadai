@@ -46,12 +46,15 @@ jobs:
           echo "Raw input value: ${{ toJson(github.event.inputs) }}"
           echo "Feature Toggle: '${{ github.event.inputs.feature_toggle }}'"
 
+      - name: Set Feature Toggle Variable
+        run: echo "FEATURE_TOGGLE=${{ github.event.inputs.feature_toggle }}" >> $GITHUB_ENV
+
       - name: Run for Staging Environment
         if: ${{ github.event.inputs.environment == 'staging' }}
         run: |
           echo "Deploying to Staging Environment"
           echo "Version: ${{ github.event.inputs.deploy_version }}"
-          echo "Feature Toggle: '${{ github.event.input.feature_toggle }}'"
+          echo "Feature Toggle: '$FEATURE_TOGGLE'"
 
       - name: Run for Production Environment
         if: ${{ github.event.inputs.environment == 'prod' }}
