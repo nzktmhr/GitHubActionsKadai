@@ -1,0 +1,15 @@
+name: "Run Bash Script Example"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-bash-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run custom action
+        uses: ./
+        with:
+          name: "Tom"
+          greeting: "こんにちは"
